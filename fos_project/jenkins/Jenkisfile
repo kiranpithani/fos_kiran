@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Source Code') {
             steps {
-                git url: '', 
+                git url: 'https://github.com/kiranpithani/fos_kiran/tree/main/java%20code/java', 
                 branch: 'main'
             }
 
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t s3urlfos_kiran:latest .'
+                sh 'docker build -t /fos_kiran:latest .'
             }
         }
     }
