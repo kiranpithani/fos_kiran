@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        // Define agent details here
+    }
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+    triggers {
+        cron('0 * * * *')
+    }
+    stages {
+        stage('Source Code') {
+            steps {
+                git url: '', 
+                branch: 'main'
+            }
+
+        }
+        stage('Build the Code') {
+            steps {
+                sh script: 'mvn clean package'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t s3urlfos_kiran:latest .'
+            }
+        }
+    }
