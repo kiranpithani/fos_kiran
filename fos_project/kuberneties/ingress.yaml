@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fos_kiran
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: fos_kiran
+          servicePort: 8080
